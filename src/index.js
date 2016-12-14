@@ -10,6 +10,7 @@ import swal from 'sweetalert';
 import rootReducer from './reducers/index.js';
 import App from './components/App.js';
 import Landing from './components/Landing.js';
+import Policy from './components/Policy.js';
 import Friends from './components/Friends/Friends.js';
 import Feed from './components/Feed/Feed.js';
 import NewFeed from './containers/Feed/NewFeed.js';
@@ -33,6 +34,7 @@ render(
 	<Provider store={store}>
 		<Router history={browserHistory}>
 			<Route path="/" component={Landing} />
+      <Route path="/policy" component={Policy} />
     	<Route component={App}>
     		<Route path="/friends" component={Friends} id={0} />
     		<Route path="/feed" component={Feed} id={0}>
@@ -83,7 +85,7 @@ function checkLoginStatus(response) {
   	const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
     const isSignedIn = (firebase.auth().currentUser !== null);
 
-    if(isSignedIn) {
+    if(isSignedIn && location.pathname !== '/policy') {
       swal({
         title: "登入中...",
         text: "",

@@ -64,6 +64,7 @@ class Landing extends Component {
 
         <section className="login">
           <button className="btn" onClick={this.login}>以 FACEBOOK 帳戶登入</button>
+          <a href="/policy" target="_blank">隱私權政策</a>
         </section>
       </div>
     );

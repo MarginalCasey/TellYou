@@ -54,10 +54,13 @@
 #landing-page > .login {
     flex: 1;
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 } 
 
 #landing-page > .login > button {
+    margin-bottom: 10px;
     padding: 4px 16px;
     border: 1px solid;
     border-radius: 16px;
@@ -65,4 +68,10 @@
     font-size: large;
     font-weight: bold;
     background-color: #3b5998;
+}
+
+#landing-page > .login > a {
+    margin-bottom: 10px;
+    font-size: small;
+    color: #6f7980;
 }
