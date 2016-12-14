@@ -1,0 +1,210 @@
+body {
+    margin: 0px;
+    font-family: Microsoft JhengHei;
+    background-color: #0084ff;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+	border: none;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn > a {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+.btn-lg {
+	padding: 2px 16px;
+}
+
+.btn-default {
+    border-radius: 3px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    box-shadow: 0 2px 0 rgba(0,0,0,.5);
+}
+
+.btn-default:hover {     
+    background-color: #E2E4E5;
+}
+
+.btn-primary {   
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    background-color: hsl(220, 46%, 48%);
+}
+
+.btn-primary:hover {   
+    background-color: hsl(220, 46%, 43%);
+}
+
+.btn-success {
+	border-radius: 3px;
+    color: white;
+    font-weight: bold;
+	background-color: hsla(122,47%,35%,1)
+}
+
+.btn-success:hover {   
+    background-color: hsla(122,47%,30%,1)
+}
+
+.btn-danger {
+	border-radius: 3px;
+    color: white;
+    font-weight: bold;
+	background-color: hsl(0, 68%, 42%);
+}
+
+.btn-danger:hover {   
+    background-color: hsl(0, 68%, 37%);
+}
+
+.sweet-alert {
+    font-family: Microsoft JhengHei !important;
+}
+
+.sweet-alert * {
+    font-family: Microsoft JhengHei !important;
+}
+
+html, body, #root, #surface {
+    height: 100%;
+}
+
+/*header*/
+
+#surface {
+	display: flex;
+	flex-direction: column;
+}
+
+#surface > header {
+    position: relative;
+	padding-left: 30px;
+    height: 55px;
+    line-height: 55px;
+    font-family: cursive, sans-serif, arial;
+    font-size: larger;
+    font-weight: bold;
+	color: white;
+	background-color: #3b5998;
+}
+
+#surface > header > strong {
+	margin-left: 3px;
+	padding: 0 4px;
+    border-radius: 3px;
+	color: #3b5998;
+	background-color: white;
+}
+
+.user-area {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.user-area > button {
+    background-color: transparent;
+}
+
+.user-area img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.user-area .account-chooser {
+    display: flex;
+    position: absolute;
+    top: 7.7px;
+    right: 0px;
+    z-index: 1;
+    padding: 0 16px;
+    background-color: white;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2),0 4px 5px 0 rgba(0,0,0,0.14),0 1px 10px 0 rgba(0,0,0,0.12);
+}
+
+.account-chooser > img {
+    width: 56px;
+    height: 56px;
+    margin: 16px;
+    border-radius: 50%;
+}
+
+.account-chooser > div {
+    display: flex;
+    flex-direction: column;
+    padding-right: 16px;
+    font-family: Microsoft JhengHei;
+    font-size: 14px;
+}
+
+.account-chooser .account-chooser-email {
+    margin-top: 24px;
+    line-height: 16px;
+    color: black;
+}
+
+.account-chooser .account-chooser-signout {
+    margin-top: 12px;
+    line-height: 16px;
+}
+
+.account-chooser .account-chooser-signout > a {
+    color: #3b5998;
+}
+
+
+
+/*nav*/
+
+#surface > nav {
+	height: 40px;
+}
+
+#surface > nav > ul {
+	display: flex;
+	justify-content: center;
+	margin: 0px;
+	padding: 0px;
+}
+
+#surface > nav > ul > li {
+	display: inline-block;
+	line-height: 40px;
+	font-weight: bold;
+}
+
+#surface > nav > ul > li > a {
+	padding: 10px 15px;
+	color: white;
+	outline: none;
+}
+
+#surface > nav > ul > li > a.active {
+	box-shadow: inset 0 -3px white;
+}
+
+/*main*/
+
+#surface > main {	
+	flex-grow: 1;
+	position: relative;
+}
