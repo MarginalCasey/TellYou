@@ -303,3 +303,55 @@
     font-weight: bold;
     color: black;
 }
+
+/*for smaller screen*/
+
+@media (max-width: 768px) {
+    .canvas {
+        right: 0;
+        bottom: 80px;
+        margin: 0;
+    }
+
+    #board > main > aside {  
+        top: calc(100% - 80px);
+        width: 100%;
+        box-shadow: none;
+    }
+
+    #board > main > aside > .list-wrapper {
+        padding: 4px 0;
+        height: 32px !important;
+    }
+
+    #board > main > aside .list {
+        flex-direction: row;
+    }
+
+    #board > main > aside .list-header {
+        min-width: 0;
+        padding: 0 8px;
+        line-height: 32px;
+    }
+
+    #board > main > aside .list-cards {
+        overflow-y: hidden;
+        overflow-x: auto;
+        margin: 0 8px 0 0;
+        padding: 0;
+    }
+
+    #board > main > aside .list-cards > div {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #board > main > aside .list-card {
+        margin: 0 8px 0 0;
+        width: 100px;
+    }
+
+    .sidebarGripper {
+        height: 0;
+    }
+}

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import HTML5Backend from 'react-dnd-html5-touch-backend';
 import User from '../containers/User.js';
 import './App.css';
 import 'sweetalert/dist/sweetalert.css';

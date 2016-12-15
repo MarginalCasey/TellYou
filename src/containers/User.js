@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
+import swal from 'sweetalert';
 
 class User extends Component {
 	static propTypes = {
@@ -15,6 +16,7 @@ class User extends Component {
 	      	isShowing: false
 	    };
 
+	    this.showInformation = this.showInformation.bind(this);
 	    this.handleClick = this.handleClick.bind(this);
 	    this.handleClickOutside = this.handleClickOutside.bind(this)
 	    this.logOut = this.logOut.bind(this);
@@ -28,6 +30,32 @@ class User extends Component {
 		document.removeEventListener('click', this.handleClickOutside, false);
 	}
 
+	showInformation() {
+		const text =
+		"<p>哈囉~ 我是作者 Casey</p>" +
+		"<p>對於空空如也的朋友列表感到困惑嗎?</p><br/>" +
+		"<p>由於facebook的限制</p>" +
+		"<p>吐露友只能取得同樣有使用這項服務的朋友清單</p>" +
+		"<p>想要將所有朋友都納入自訂朋友圈的話</p>" +
+		"<p>只能麻煩各位自行邀請囉~</p><br/>" +
+		"<p>因為我自己也是這麼做的... ┐(´д`)┌</p>"
+		
+
+		swal({
+          	title: "關於吐露友",
+          	text: text,
+          	type: "info",
+        	confirmButtonColor: "#3b5998",
+        	html: true
+        });
+	}
+	
+	handleClick() {
+		this.setState({
+			isShowing: true
+		});
+	}
+
 	handleClickOutside(event) {
 	    const domNode = findDOMNode(this);
 
@@ -36,12 +64,6 @@ class User extends Component {
 	            isShowing : false
 	        });
 	    }
-	}
-
-	handleClick() {
-		this.setState({
-			isShowing: true
-		});
 	}
 
 	logOut() {
@@ -55,7 +77,10 @@ class User extends Component {
 
 		return(
 			<div className="user-area">
-				<button className="btn" onClick={this.handleClick}>
+				<button className="btn information" onClick={this.showInformation}>
+					<i className="fa fa-info-circle" aria-hidden="true"></i>
+				</button>
+				<button className="btn user" onClick={this.handleClick}>
 					<img src={photo} alt=""/>
 				</button>
 			{
