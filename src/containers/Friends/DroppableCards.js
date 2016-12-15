@@ -249,10 +249,12 @@ const mapStateToProps = (state, ownProps) => {
   let childCards = [...members];
 
   children.forEach((childrenId) => {
-    state.entities.friendLists[childrenId].members.forEach((memberId) => {
-      let i = childCards.indexOf(memberId);
-      (i !== -1) &&childCards.splice(i, 1);
-    });
+    if(state.entities.friendLists[childrenId]) {
+      state.entities.friendLists[childrenId].members.forEach((memberId) => {
+        let i = childCards.indexOf(memberId);
+        (i !== -1) &&childCards.splice(i, 1);
+      });
+    }
   });
 
   return {

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { DragSource } from 'react-dnd';
@@ -51,63 +51,85 @@ function collect(connect, monitor) {
   	};
 }
 
-let DraggableFriendList = ({
-	id, canvas, title, members, children, 
-	isDragging, connectDragSource, 
-	renameList, deleteList, friendLists, 
-	getBreakpoints
-}) => {
-	let listId;
+class DraggableFriendList extends Component {
+	static propTypes = {
+		id: PropTypes.number.isRequired,
+		canvas: PropTypes.number.isRequired,
+		parent: PropTypes.number.isRequired,
+		title: PropTypes.string.isRequired,
+		members: PropTypes.arrayOf(PropTypes.string).isRequired,
+		children: PropTypes.arrayOf(PropTypes.number).isRequired,
+		friendLists: PropTypes.object.isRequired,
+		renameList: PropTypes.func.isRequired,
+		deleteList: PropTypes.func.isRequired
+	}
 
-	if(id === -1)
-  		listId = 'list-uncategorized';
-	else if(id === -2)
-  		listId = 'list-categorized';
-	else
-  		listId = 'list-' + id; 
+	constructor(props) {
+    	super(props);
 
-  	const deleteListFamily = (id) => {
+	    this.deleteListFamily = this.deleteListFamily.bind(this);
+	}
+
+	deleteListFamily(id) {
+		const { friendLists, deleteList } = this.props;
+
   		friendLists[id].children.forEach((id) => {
-  			deleteListFamily(id);
+  			this.deleteListFamily(id);
   		})
   		deleteList(id);
   	}
 
-	return connectDragSource(
-		<div id={listId} className="draggable">
-			<FriendList 
-				id={id}
-				canvas={canvas}
-				title={title}
-				members={members}
-				children={children}
-				renameList={renameList}
-				deleteList={deleteListFamily}
-				getBreakpoints={getBreakpoints} />
-		</div>
-	);
-}
+  	render() {
+  		const {
+			id, canvas, title, members, children, 
+			connectDragSource, 
+			renameList,
+			getBreakpoints
+		} = this.props;
 
-DraggableFriendList.propTypes = {
-	id: PropTypes.number.isRequired,
-	canvas: PropTypes.number.isRequired,
-	parent: PropTypes.number.isRequired,
-	title: PropTypes.string.isRequired,
-	members: PropTypes.arrayOf(PropTypes.string).isRequired,
-	children: PropTypes.arrayOf(PropTypes.number).isRequired,
-	friendLists: PropTypes.object.isRequired,
-	renameList: PropTypes.func.isRequired,
-	deleteList: PropTypes.func.isRequired
+		let listId;
+
+		if(id === -1)
+	  		listId = 'list-uncategorized';
+		else if(id === -2)
+	  		listId = 'list-categorized';
+		else
+	  		listId = 'list-' + id; 
+
+		return connectDragSource(
+			<div id={listId} className="draggable">
+				<FriendList 
+					id={id}
+					canvas={canvas}
+					title={title}
+					members={members}
+					children={children}
+					renameList={renameList}
+					deleteList={this.deleteListFamily}
+					getBreakpoints={getBreakpoints} />
+			</div>
+		);
+  	}
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const { title, members, children } = state.entities.friendLists[ownProps.id];
- 	return {
-    	title,
-    	members,
-    	children,
-    	friendLists: state.entities.friendLists,
-  	}
+	if(state.entities.friendLists[ownProps.id]) {
+		const { title, members, children } = state.entities.friendLists[ownProps.id];
+	 	return {
+	    	title,
+	    	members,
+	    	children,
+	    	friendLists: state.entities.friendLists
+	  	};
+	}
+	else {
+		return {
+			title: '',
+			members: [],
+			children: [],
+			friendLists: state.entities.friendLists
+		};
+	}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -118,7 +140,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   		deleteList: (id) => {
 			dispatch(deleteList(id));
   		}
-  	}
+  	};
 }
 
 DraggableFriendList = connect(mapStateToProps,mapDispatchToProps)(DraggableFriendList);
