@@ -11,6 +11,7 @@ class FriendList extends Component {
 		title: PropTypes.string.isRequired,
 		members: PropTypes.arrayOf(PropTypes.string),
 		children: PropTypes.arrayOf(PropTypes.number),
+		demo: PropTypes.bool,
 		renameList: PropTypes.func,
 		deleteList: PropTypes.func
 	}
@@ -50,7 +51,12 @@ class FriendList extends Component {
 		},
 		function(){
 			deleteList(id);
-		  	swal("刪除成功", "", "success");
+			swal({
+		     	title: "刪除成功",
+		      	text: "",
+		      	type: "success",
+		      	confirmButtonColor: "#3b5998",
+		    });
 		});
 	}
 
@@ -69,7 +75,7 @@ class FriendList extends Component {
 	}
 
 	render() {
-		const { id, canvas, title, members, children, getBreakpoints } = this.props;
+		const { id, canvas, title, members, children, demo, getBreakpoints } = this.props;
 		const { isEditing, isOpen } = this.state; 
 		let listId;
 
@@ -137,8 +143,8 @@ class FriendList extends Component {
 				
 				<div className="list-footer">
 				{
-					(id !== -1 && id !== -2) && !(members.length === 0 && children.length === 0) && isOpen &&
-					<Link to={{ pathname: '/friends', query: { listId: id } }} className="list-header-extra" activeClassName="active">
+					(id !== -1 && id !== -2) && !(members.length === 0 && children.length === 0) && isOpen && 
+					<Link to={{ pathname: demo ? '/demo/friends' : '/friends', query: { listId: id } }} className="list-header-extra" activeClassName="active">
 						詳細檢視	
 					</Link>
 				}

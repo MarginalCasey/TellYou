@@ -13,6 +13,7 @@ class FriendList extends Component {
 		children: PropTypes.arrayOf(PropTypes.number).isRequired,
 		friendLists: PropTypes.object.isRequired,
 		isChecked: PropTypes.bool.isRequired,
+		demo: PropTypes.bool.isRequired,
 		addToList: PropTypes.func.isRequired, 
     	removeFromList: PropTypes.func.isRequired
 	}
@@ -44,7 +45,7 @@ class FriendList extends Component {
 	}
 
 	render() {
-		const { type, id, title, members, children, friendLists, isChecked, addToList, removeFromList } = this.props;
+		const { type, id, title, members, children, friendLists, isChecked, demo, addToList, removeFromList } = this.props;
 		const { isOpen } = this.state; 
 		let listId;
 		let childCards = [...members];
@@ -108,7 +109,7 @@ class FriendList extends Component {
 				<div className="list-footer">
 				{
 					(id !== -1 && id !== -2) && !(members.length === 0 && children.length === 0) && isOpen &&
-					<Link to={{ pathname: '/feed/'+type, query: { listId: id } }} className="list-header-extra" activeClassName="active">
+					<Link to={{ pathname: demo ? '/demo/feed/' + type : '/feed/' + type, query: { listId: id } }} className="list-header-extra" activeClassName="active">
 						詳細檢視	
 					</Link>
 				}
@@ -154,7 +155,8 @@ const mapStateToProps = (state, ownProps) => {
 
   	return {
     	friendLists,
-    	isChecked
+    	isChecked,
+    	demo: state.demo
   	}
 }
 

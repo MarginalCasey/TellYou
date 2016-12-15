@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-let Navbar = ({id, type, friendLists}) => {
+let Navbar = ({id, type, friendLists, demo}) => {
   let title, parent = 0;
   
   if(friendLists[id]) {
@@ -17,7 +17,7 @@ let Navbar = ({id, type, friendLists}) => {
     if(currentParent === 0){
       parentList.unshift(
         <li key="all">
-          <Link to={'/feed/'+ type} className="list-header-extra" activeClassName="active">
+          <Link to={demo ? '/demo/feed/' + type : '/feed/'+ type} className="list-header-extra" activeClassName="active">
           {friendLists[currentParent].title}
           </Link>
         </li>
@@ -26,7 +26,7 @@ let Navbar = ({id, type, friendLists}) => {
     else{
       parentList.unshift(
         <li key={currentParent}>
-          <Link to={{ pathname: '/feed/' + type, query: { listId: currentParent } }} className="list-header-extra" activeClassName="active">
+          <Link to={{ pathname: demo ? '/demo/feed/' + type : '/feed/'+ type, query: { listId: currentParent } }} className="list-header-extra" activeClassName="active">
           {friendLists[currentParent].title}
           </Link>
         </li>
@@ -49,7 +49,7 @@ let Navbar = ({id, type, friendLists}) => {
         <li key="current">{title}</li>
       </ul>
       <button className="btn btn-default">
-        <Link to='/feed'>
+        <Link to={demo ? '/demo/feed' : '/feed'}>
           返回
         </Link>
       </button>
@@ -60,12 +60,14 @@ let Navbar = ({id, type, friendLists}) => {
 Navbar.propTypes = {
   id: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
-  friendLists: PropTypes.object.isRequired
+  friendLists: PropTypes.object.isRequired,
+  demo: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    friendLists: state.entities.friendLists
+    friendLists: state.entities.friendLists,
+    demo: state.demo
   }
 }
 

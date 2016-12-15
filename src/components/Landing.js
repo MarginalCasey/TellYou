@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import swal from 'sweetalert';
@@ -63,7 +63,10 @@ class Landing extends Component {
         </section>
 
         <section className="login">
-          <button className="btn" onClick={this.login}>以 FACEBOOK 帳戶登入</button>
+          <div className="btn-group">
+            <button className="btn facebook" onClick={this.login}>以 FACEBOOK 帳戶登入</button>
+            <button className="btn demo"><Link to="/demo/friends">體驗 DEMO</Link></button>
+          </div>
           <a href="/policy" target="_blank">隱私權政策</a>
         </section>
       </div>

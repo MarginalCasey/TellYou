@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-router';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
@@ -34,7 +34,9 @@ render(
 	<Provider store={store}>
 		<Router history={browserHistory}>
 			<Route path="/" component={Landing} />
+
       <Route path="/policy" component={Policy} />
+
     	<Route component={App}>
     		<Route path="/friends" component={Friends} id={0} />
     		<Route path="/feed" component={Feed} id={0}>
@@ -43,6 +45,16 @@ render(
           <Route path="/feed/exclude" component={Setting} id={0} type='exclude' />
         </Route>
     	</Route>
+
+      <Route component={App}>
+        <Redirect from="/demo" to="/demo/friends" />
+        <Route path="/demo/friends" component={Friends} id={0} />
+        <Route path="/demo/feed" component={Feed} id={0}>
+          <IndexRoute component={NewFeed}/>
+          <Route path="/demo/feed/include" component={Setting} id={0} type='include' />
+          <Route path="/demo/feed/exclude" component={Setting} id={0} type='exclude' />
+        </Route>
+      </Route>
   	</Router>
 	</Provider>,
 	document.getElementById('root')
@@ -60,14 +72,16 @@ firebase.initializeApp(config);
 
 // Initialize FB
 window.fbAsyncInit = function() {
-  window.FB.init({
-    appId      : '661692607342749',
-    cookie     : true,
-    xfbml      : false, 
-    version    : 'v2.8' 
-  });
+  if(location.pathname.slice(0, 5) !== '/demo') {
+    window.FB.init({
+      appId      : '661692607342749',
+      cookie     : true,
+      xfbml      : false, 
+      version    : 'v2.8' 
+    });
 
-  window.FB.getLoginStatus(checkLoginStatus);
+    window.FB.getLoginStatus(checkLoginStatus);
+  }
 };
 
 (function(d, s, id) {
@@ -107,8 +121,20 @@ function checkLoginStatus(response) {
 
       });
     }
-    	
+    // Sign out from tellyou
+    if(!isSignedIn && location.pathname !== '/') {
+      swal({
+        title: "未登入",
+        text: "將重新導向至登入頁面",
+        type: "error",
+        confirmButtonColor: "#3b5998"
+      },
+      function(){
+        location.href = '/';
+      });   
+    }
   }
+  // Sign out from FB
   else {
   	if(location.pathname !== '/'){
       swal({

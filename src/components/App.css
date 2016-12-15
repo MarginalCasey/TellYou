@@ -93,6 +93,10 @@ html, body, #root, #surface {
 
 #surface > header {
     position: relative;
+    background-color: #3b5998;
+}
+
+#surface > header > a {
 	padding-left: 30px;
     height: 55px;
     line-height: 55px;
@@ -103,7 +107,7 @@ html, body, #root, #surface {
 	background-color: #3b5998;
 }
 
-#surface > header > strong {
+#surface > header > a > strong {
 	margin-left: 3px;
 	padding: 0 4px;
     border-radius: 3px;

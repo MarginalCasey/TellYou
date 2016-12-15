@@ -9,6 +9,7 @@ class NewFeed extends Component {
 		photo: PropTypes.string.isRequired,
 		childCards: PropTypes.arrayOf(PropTypes.string).isRequired,
 		content: PropTypes.string.isRequired,
+		demo: PropTypes.bool.isRequired,
 		addToList:  PropTypes.func.isRequired, 
 		removeFromList: PropTypes.func.isRequired,
 		editFeed: PropTypes.func.isRequired,
@@ -31,7 +32,7 @@ class NewFeed extends Component {
   	}
 
 	render() {	
-		const { photo, childCards, content, addToList, removeFromList } = this.props;
+		const { photo, childCards, content, demo, addToList, removeFromList } = this.props;
 
 		return (
 			<div id="container">
@@ -50,12 +51,12 @@ class NewFeed extends Component {
 					<header>隱私設定</header>
 					<main>
 						<button className="btn btn-lg btn-success">
-							<Link to='/feed/include'>
+							<Link to={demo ? '/demo/feed/include' : '/feed/include'}>
           						分享範圍
         					</Link>
         				</button>
         				<button className="btn btn-lg btn-danger">
-							<Link to='/feed/exclude'>
+							<Link to={demo ? '/demo/feed/exclude' : '/feed/exclude'}>
           						排除對象
         					</Link>
         				</button>
@@ -92,7 +93,8 @@ const mapStateToProps = (state, ownProps) => {
   	return {
   		photo,
     	childCards,
-    	content
+    	content,
+    	demo: state.demo
   	};
 }
 

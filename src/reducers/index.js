@@ -3,18 +3,35 @@ import feed from './feed.js';
 import friendLists from './friendLists.js';
 
 import {
+  DEMO_START, DEMO_END
+} from '../actions/demo.js';
+
+import {
   LOGIN
-} from '../actions/user.js'
+} from '../actions/user.js';
 
 import {
   FETCH_LISTS_START, FETCH_LISTS_SUCCESS, FETCH_LISTS_FAILURE,
   FETCH_FRIENDS_START, FETCH_FRIENDS_SUCCESS, FETCH_FRIENDS_FAILURE
-} from '../actions/fetch.js'
+} from '../actions/fetch.js';
 
 import {
   CREATE_LIST, MOVE_LIST, RENAME_LIST, DELETE_LIST,
   ADD_FRIEND, REMOVE_FRIEND
-} from '../actions/friends.js'
+} from '../actions/friends.js';
+
+function demo(state = false, action) {
+  switch (action.type) {
+    case DEMO_START:
+      return true;
+
+    case DEMO_END:
+      return false;
+
+    default:
+      return state;
+  }
+}
 
 function user(state = {
   uid: '',
@@ -23,7 +40,7 @@ function user(state = {
   photo: '',
   accessToken: ''
 }, action) {
-  const {type, uid, email, name, photo, accessToken} = action;
+  const { type, uid, email, name, photo, accessToken } = action;
 
   switch (type) {
     case LOGIN:
@@ -36,7 +53,7 @@ function user(state = {
       });
 
     default:
-      return state
+      return state;
   }
 }
 
@@ -64,7 +81,7 @@ function friendsFromFB(state = {
       });
 
     default:
-      return state
+      return state;
   }
 }
 
@@ -90,7 +107,7 @@ function friendListsFromDB(state = {
       });
 
     default:
-      return state
+      return state;
   }
 }
 
@@ -133,11 +150,12 @@ function entities(state = {
       });
 
     default:
-      return state
+      return state;
   }
 }
 
 const rootReducer = combineReducers({
+  demo,
   user,
   feed,
   friendsFromFB,

@@ -60,6 +60,7 @@ class DraggableFriendList extends Component {
 		members: PropTypes.arrayOf(PropTypes.string).isRequired,
 		children: PropTypes.arrayOf(PropTypes.number).isRequired,
 		friendLists: PropTypes.object.isRequired,
+		demo: PropTypes.bool.isRequired,
 		renameList: PropTypes.func.isRequired,
 		deleteList: PropTypes.func.isRequired
 	}
@@ -81,7 +82,7 @@ class DraggableFriendList extends Component {
 
   	render() {
   		const {
-			id, canvas, title, members, children, 
+			id, canvas, title, members, children, demo,
 			connectDragSource, 
 			renameList,
 			getBreakpoints
@@ -104,6 +105,7 @@ class DraggableFriendList extends Component {
 					title={title}
 					members={members}
 					children={children}
+					demo={demo}
 					renameList={renameList}
 					deleteList={this.deleteListFamily}
 					getBreakpoints={getBreakpoints} />
@@ -119,7 +121,8 @@ const mapStateToProps = (state, ownProps) => {
 	    	title,
 	    	members,
 	    	children,
-	    	friendLists: state.entities.friendLists
+	    	friendLists: state.entities.friendLists,
+	    	demo: state.demo
 	  	};
 	}
 	else {
@@ -127,7 +130,8 @@ const mapStateToProps = (state, ownProps) => {
 			title: '',
 			members: [],
 			children: [],
-			friendLists: state.entities.friendLists
+			friendLists: state.entities.friendLists,
+			demo: state.demo
 		};
 	}
 }

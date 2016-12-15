@@ -11,8 +11,9 @@ require("firebase/database");
 
 function postList() {
   return (dispatch, getState) => {
-    const { user, entities } = getState();
-    firebase.database().ref('users/' + user.uid +'/friendLists').set(entities.friendLists);
+    const { demo, user, entities } = getState();
+    if(!demo)
+      firebase.database().ref('users/' + user.uid +'/friendLists').set(entities.friendLists);
   }
 }
   

@@ -9,7 +9,7 @@ export function loginAndFetch(uid, email, name, photo, accessToken) {
   };
 }
 
-function login(uid, email, name, photo, accessToken) {	
+export function login(uid, email, name, photo, accessToken) {	
   	return { 
     	type: LOGIN,
     	uid,

@@ -19,37 +19,43 @@ export function editFeed(content) {
 export function postFeed() {
   return (dispatch, getState) => {
     const { content, include, exclude } = getState().feed;
+    const { demo } = getState();
 
-    let finalList = [...include], index;
-
-    for(let i = 0, length = include.length; i < length; i++) {
-      if(exclude.indexOf(include[i]) !== -1){
-        index = finalList.indexOf(include[i]);
-        finalList.splice(index, 1);
-      }
-    }
-
-    if(finalList.length === 0) {
-      window.FB.api(
-        '/me/feed',
-        'POST',
-        {
-          'message': content,
-          'privacy': '{value: "SELF"}'
-        },
-        postResult.bind(null, dispatch)
-      );  
+    if(demo) {
+      postResult(dispatch, {});
     }
     else {
-      window.FB.api(
-        '/me/feed',
-        'POST',
-        {
-          'message': content,
-          'privacy': '{value: "CUSTOM", allow:"' + finalList.toString() +'"}'
-        },
-        postResult.bind(null, dispatch)
-      );  
+      let finalList = [...include], index;
+
+      for(let i = 0, length = include.length; i < length; i++) {
+        if(exclude.indexOf(include[i]) !== -1){
+          index = finalList.indexOf(include[i]);
+          finalList.splice(index, 1);
+        }
+      }
+
+      if(finalList.length === 0) {
+        window.FB.api(
+          '/me/feed',
+          'POST',
+          {
+            'message': content,
+            'privacy': '{value: "SELF"}'
+          },
+          postResult.bind(null, dispatch)
+        );  
+      }
+      else {
+        window.FB.api(
+          '/me/feed',
+          'POST',
+          {
+            'message': content,
+            'privacy': '{value: "CUSTOM", allow:"' + finalList.toString() +'"}'
+          },
+          postResult.bind(null, dispatch)
+        );  
+      }
     }
   };
 }

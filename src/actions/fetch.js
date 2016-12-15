@@ -29,57 +29,62 @@ function fetchListsFailure(error) {
   	};
 }
 
-function receiveLists(json) {
-	return (dispatch) => {
-		if(true){
-			const friendListsFromDB = json;
+export function receiveLists(response) {
+	return (dispatch, getState) => {
+		if(!response.error){
+			const friendListsFromDB = response;
 			const missing = [];
+			const { demo  } = getState();
 
-			dispatch(fetchFriends()).then((data) => {
-			    swal({
-				  	title: "資料更新完畢",
-				  	text: "",
-				  	type: "success",
-				  	showConfirmButton: false
-				});
-
-				setTimeout(function(){
-				    swal.close();
-				}, 1000);
-
-				const friendsFromFaceBook = data.map(friend => friend.id);
-
-				// get missing friends
-				friendListsFromDB[0].members.forEach((id) => {
-					if(id === 'nextId') return;
-
-					if(friendsFromFaceBook.indexOf(id) === -1)
-						missing.push(id);
-				});
-
-				// remove missing friends from list
-				missing.forEach((id) => {
-					Object.getOwnPropertyNames(friendListsFromDB).forEach((i) => {
-						if(i === 'nextId') return;
-
-						let index = friendListsFromDB[i].members.indexOf(id);
-						if(index !== -1)
-							friendListsFromDB[i].members.splice(index, 1);
-					})
-				});
-
-				// add new friends to friendLists[0]
-				friendsFromFaceBook.forEach((id) => {
-					if(friendListsFromDB[0].members.indexOf(id) === -1)
-						friendListsFromDB[0].members.push(id);
-				});
-
+			if(demo) {
 				dispatch(fetchListsSuccess(friendListsFromDB));
-			});
-				
+			}
+			else {
+				dispatch(fetchFriends()).then((data) => {
+				    swal({
+					  	title: "資料更新完畢",
+					  	text: "",
+					  	type: "success",
+					  	showConfirmButton: false
+					});
+
+					setTimeout(function(){
+					    swal.close();
+					}, 1000);
+
+					const friendsFromFaceBook = data.map(friend => friend.id);
+
+					// get missing friends
+					friendListsFromDB[0].members.forEach((id) => {
+						if(id === 'nextId') return;
+
+						if(friendsFromFaceBook.indexOf(id) === -1)
+							missing.push(id);
+					});
+
+					// remove missing friends from list
+					missing.forEach((id) => {
+						Object.getOwnPropertyNames(friendListsFromDB).forEach((i) => {
+							if(i === 'nextId') return;
+
+							let index = friendListsFromDB[i].members.indexOf(id);
+							if(index !== -1)
+								friendListsFromDB[i].members.splice(index, 1);
+						})
+					});
+
+					// add new friends to friendLists[0]
+					friendsFromFaceBook.forEach((id) => {
+						if(friendListsFromDB[0].members.indexOf(id) === -1)
+							friendListsFromDB[0].members.push(id);
+					});
+
+					dispatch(fetchListsSuccess(friendListsFromDB));
+				});
+			}	
 		}
 		else {
-			dispatch(fetchListsFailure(json.error));
+			dispatch(fetchListsFailure(response.error));
 		}
 	};	
 }
@@ -94,10 +99,10 @@ export function fetchLists() {
 		  	imageUrl: "/loading.gif",
 		  	showConfirmButton: false
 		});
-	
 
     	dispatch(requestLists());
-	    firebase.database().ref('users/' + user.uid +'/friendLists').once('value').then(function(snapshot) {
+	    firebase.database().ref('users/' + user.uid +'/friendLists').once('value')
+	    .then(snapshot => {
 	    	// for new user
 		  	let friendLists = entities.friendLists;
 
@@ -116,7 +121,10 @@ export function fetchLists() {
 		  	}
 
 		  	dispatch(receiveLists(friendLists));
-		});
+		})
+		.catch(error => {
+			dispatch(receiveLists({error: error}));
+        });
   	};
 }
 
@@ -127,7 +135,7 @@ function requestFriends() {
   	};
 }
 
-function fetchFriendsSuccess(item) {
+export function fetchFriendsSuccess(item) {
   	return { 
     	type: FETCH_FRIENDS_SUCCESS,
 		data: item

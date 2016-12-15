@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-let Navbar = ({id, friendLists}) => {
+let Navbar = ({id, friendLists, demo}) => {
   let title, parent = 0;
   
   if(friendLists[id]) {
@@ -17,7 +17,7 @@ let Navbar = ({id, friendLists}) => {
     if(currentParent === 0){
       parentList.unshift(
         <li key="all">
-          <Link to="/friends" className="list-header-extra" activeClassName="active">
+          <Link to={demo ? '/demo/friends' : '/friends'} className="list-header-extra" activeClassName="active">
           {friendLists[currentParent].title}
           </Link>
         </li>
@@ -26,7 +26,7 @@ let Navbar = ({id, friendLists}) => {
     else{
       parentList.unshift(
         <li key={currentParent}>
-          <Link to={{ pathname: '/friends', query: { listId: currentParent } }} className="list-header-extra" activeClassName="active">
+          <Link to={{ pathname: demo ? '/demo/friends' : '/friends', query: { listId: currentParent } }} className="list-header-extra" activeClassName="active">
           {friendLists[currentParent].title}
           </Link>
         </li>
@@ -48,12 +48,14 @@ let Navbar = ({id, friendLists}) => {
 
 Navbar.propTypes = {
   id: PropTypes.number.isRequired,
-  friendLists: PropTypes.object.isRequired
+  friendLists: PropTypes.object.isRequired,
+  demo: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    friendLists: state.entities.friendLists
+    friendLists: state.entities.friendLists,
+    demo: state.demo
   }
 }
 

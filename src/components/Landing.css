@@ -59,8 +59,7 @@
     justify-content: space-between;
 } 
 
-#landing-page > .login > button {
-    margin-bottom: 10px;
+#landing-page > .login  .btn-group > .facebook {
     padding: 4px 16px;
     border: 1px solid;
     border-radius: 16px;
@@ -68,6 +67,17 @@
     font-size: large;
     font-weight: bold;
     background-color: #3b5998;
+}
+
+#landing-page > .login  .btn-group > .demo {
+    margin-left: 10px;
+    padding: 4px 16px;
+    border: 1px solid;
+    border-radius: 16px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    background-color: #ef4144;
 }
 
 #landing-page > .login > a {
