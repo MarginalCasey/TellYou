@@ -1,0 +1,108 @@
+#landing-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    background-color: #E2E4E6;
+}
+
+#landing-page > header {
+    padding: 0 30px;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+}
+
+#landing-page > header .english {
+    font-family: cursive, sans-serif, arial;
+}
+
+#landing-page > header strong:first-child {
+    padding: 0 8px;
+    border-radius: 8px 0 0 8px;
+    color: white;
+    background-color: #3b5998;
+}
+
+#landing-page > header strong:last-child {
+    padding: 0 8px;
+    border-radius: 0 8px 8px 0;
+    color: #3b5998;
+    background-color: white;
+}
+
+#landing-page > header .chinese {
+    padding-left: 10px;
+    font-size: 40px;
+    color: #3b5998;
+    text-align: center;
+}
+
+#landing-page > .intro {
+    padding: 0 30px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+} 
+
+#landing-page > .intro > .slogan {
+    text-align: center;
+    font-size: larger;
+} 
+
+#landing-page > .login {
+    padding: 0 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+} 
+
+#landing-page > .login > .btn-group {
+    display: flex;
+    align-items: center;
+}
+
+#landing-page > .login > .btn-group > .facebook {
+    padding: 4px 16px;
+    border: 1px solid;
+    border-radius: 16px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    background-color: #3b5998;
+}
+
+#landing-page > .login > .btn-group > .demo {
+    margin-left: 10px;
+    padding: 4px 16px;
+    border: 1px solid;
+    border-radius: 16px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    background-color: #ef4144;
+}
+
+#landing-page > .login > a {
+    margin-bottom: 10px;
+    font-size: small;
+    color: #6f7980;
+}
+
+@media (max-width: 400px) {
+    #landing-page > header > div {
+        display: flex;
+        flex-direction: column; 
+        align-content: center; 
+    }
+
+    #landing-page > header .chinese {
+        padding-left: 0;
+    }
+}
