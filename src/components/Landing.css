@@ -17,7 +17,7 @@
     color: white;
 }
 
-#landing-page > header > .english {
+#landing-page > header .english {
     font-family: cursive, sans-serif, arial;
 }
 
@@ -35,10 +35,11 @@
     background-color: white;
 }
 
-#landing-page > header > .chinese {
+#landing-page > header .chinese {
     padding-left: 10px;
     font-size: 40px;
     color: #3b5998;
+    text-align: center;
 }
 
 #landing-page > .intro {
@@ -92,4 +93,16 @@
     margin-bottom: 10px;
     font-size: small;
     color: #6f7980;
+}
+
+@media (max-width: 400px) {
+    #landing-page > header > div {
+        display: flex;
+        flex-direction: column; 
+        align-content: center; 
+    }
+
+    #landing-page > header .chinese {
+        padding-left: 0;
+    }
 }

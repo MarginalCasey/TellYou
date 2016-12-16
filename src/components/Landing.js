@@ -46,13 +46,15 @@ class Landing extends Component {
     return (
       <div id="landing-page">
         <header>
-          <span className='english'>
-            <strong>Tell</strong>
-            <strong>You</strong>
-          </span> 
-          <span className='chinese'>
-            吐露友
-          </span>
+          <div>
+            <span className='english'>
+              <strong>Tell</strong>
+              <strong>You</strong>
+            </span> 
+            <span className='chinese'>
+              吐露友
+            </span>
+          </div>   
         </header>
 
         <section className="intro">

@@ -17,7 +17,6 @@
 #board > nav {
     display: inline-flex;
     align-items: center;
-	height: 40px;
     font-weight: bold;
     background-color: #E2E4E6;
 }

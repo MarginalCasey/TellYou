@@ -72,14 +72,14 @@ firebase.initializeApp(config);
 
 // Initialize FB
 window.fbAsyncInit = function() {
-  if(location.pathname.slice(0, 5) !== '/demo') {
-    window.FB.init({
-      appId      : '661692607342749',
-      cookie     : true,
-      xfbml      : false, 
-      version    : 'v2.8' 
-    });
+  window.FB.init({
+    appId      : '661692607342749',
+    cookie     : true,
+    xfbml      : false, 
+    version    : 'v2.8' 
+  });
 
+  if(location.pathname.slice(0, 5) !== '/demo') {
     window.FB.getLoginStatus(checkLoginStatus);
   }
 };
