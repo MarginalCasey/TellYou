@@ -209,6 +209,10 @@
     z-index: 1;
 }
 
+.list-cards > div {
+    min-height: 5px;
+}
+
 .list-card {
     position: relative;
     display: flex;
