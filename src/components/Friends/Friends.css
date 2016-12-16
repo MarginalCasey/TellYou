@@ -182,7 +182,7 @@
 
 /*List*/
 
-.canvas > .list-wrapper > .draggable {
+.canvas > .list-wrapper > div {
     height: inherit;
 }
 

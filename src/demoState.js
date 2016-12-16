@@ -13,13 +13,13 @@ export const friendLists = {
     title: '小智與他的快樂夥伴',
     members: ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
     parent: -1,
-    children: [1, 6, 2, 4, 5, 7]
+    children: [6, 2, 4, 5, 7]
   },
   1: {
     id: 1,
     title: '同伴',
     members: ['0','1','2','3','4','5'],
-    parent: 0,
+    parent: 6,
     children: []
   },
   2: {
@@ -27,14 +27,14 @@ export const friendLists = {
     title: '對手',
     members: ['6','7','14','15','16','17'],
     parent: 0,
-    children: [3]
+    children: [9, 3]
   },
   3: {
     id: 3,
     title: '邪惡組織',
     members: ['14','15','16'],
     parent: 2,
-    children: [8]
+    children: [8, 10, 11]
   },
   4: {
     id: 4,
@@ -55,7 +55,7 @@ export const friendLists = {
     title: '後宮',
     members: ['0','1','2','3','4','5','6','7','8','9','10'],
     parent: 0,
-    children: []
+    children: [1]
   },
   7: {
     id: 7,
@@ -71,6 +71,27 @@ export const friendLists = {
     parent: 3,
     children: []
   },
+  9: {
+    id: 9,
+    title: '宿敵',
+    members: ['17'],
+    parent: 2,
+    children: []
+  },
+  10: {
+    id: 10,
+    title: '水艦隊',
+    members: [],
+    parent: 3,
+    children: []
+  },
+  11: {
+    id: 11,
+    title: '火岩隊',
+    members: [],
+    parent: 3,
+    children: []
+  }
 };
 
 export const friends = {
