@@ -79,7 +79,7 @@ window.fbAsyncInit = function() {
     version    : 'v2.8' 
   });
 
-  if(location.pathname.slice(0, 5) !== '/demo') {
+  if(location.pathname.slice(0, 5) !== '/demo' && location.pathname !== '/policy') {
     window.FB.getLoginStatus(checkLoginStatus);
   }
 };
@@ -99,7 +99,7 @@ function checkLoginStatus(response) {
   	const credential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
     const isSignedIn = (firebase.auth().currentUser !== null);
 
-    if(isSignedIn && location.pathname !== '/policy') {
+    if(isSignedIn) {
       swal({
         title: "登入中...",
         text: "",
